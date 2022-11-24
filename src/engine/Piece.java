@@ -31,19 +31,27 @@ public class Piece {
     }
 
     public int getRank() {
-        return rank;
+        return this.rank;
     }
 
     public int getFile() {
-        return file;
+        return this.file;
+    }
+
+    public void setRank(int newRank) {
+        this.rank = newRank;
+    }
+
+    public void setFile(int newFile) {
+        this.file = newFile;
     }
 
     public int getPieceType() {
-        return piece & typeMask;
+        return this.piece & typeMask;
     }
 
     public int getPieceColor() {
-        return piece & colorMask;
+        return this.piece & colorMask;
     }
 
     public Image getImage() {
