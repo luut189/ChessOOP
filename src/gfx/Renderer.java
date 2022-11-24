@@ -24,23 +24,40 @@ public class Renderer extends JPanel {
         this.board = board;
 
         this.setPreferredSize(new Dimension(this.windowSize, this.windowSize));
+        this.addMouseListener(new MouseHandler(this, board, windowSize));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBoard(g);
+        drawSelected(g);
         drawPieces(this.board, g);
     }
 
     public void drawPieces(Board board, Graphics g) {
-        Piece[][] game = board.getGameBoard();
-
         for(int rank = 0; rank < 8; rank++) {
             for(int file = 0; file < 8; file++) {
-                if(game[rank][file] != null) {
-                    g.drawImage(game[rank][file].getImage(), file*size, rank*size, size, size, null);
+                if(board.getPieceAtPosition(rank, file) != null) {
+                    g.drawImage(board.getPieceAtPosition(rank, file).getImage(), file*size, rank*size, size, size, null);
                 }
             }
+        }
+    }
+
+    public void drawSelected(Graphics g) {
+        int selectedStartRank = board.getSelectedStartRank();
+        int selectedStartFile = board.getSelectedStartFile();
+
+        if(selectedStartRank != -1 && selectedStartFile != -1) {
+            Color rightColor = new Color(0, 0, 255, 75);
+            Color wrongColor = new Color(255, 0, 0, 75);
+            Piece piece = board.getPieceAtPosition(selectedStartRank, selectedStartFile);
+            if(piece != null) {
+                g.setColor(piece.isColorToMove(board) ? rightColor : wrongColor);
+            } else {
+                g.setColor(wrongColor);
+            }
+            g.fillRect(selectedStartFile*size, selectedStartRank*size, size, size);
         }
     }
 
