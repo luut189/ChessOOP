@@ -9,7 +9,7 @@ The workspace contains:
 - `src`: the folder to maintain sources
     - `engine`: the package to maintain sources related to the Chess engine
     
-    - `gui`: the package to maintain sources related to the GUI
+    - `gfx`: the package to maintain sources related to the GUI
 
     - `App.java`: the main class
 - `res`: the folder to maintain sprites for rendering
