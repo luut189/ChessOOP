@@ -11,6 +11,7 @@ public class GUI extends JFrame {
 
         this.setTitle(title);
         this.add(render);
+        this.addMouseListener(new MouseHandler(board));
         this.pack();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
