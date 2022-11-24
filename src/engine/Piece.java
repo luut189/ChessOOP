@@ -22,7 +22,7 @@ public class Piece {
     private final static int typeMask = 0b00111;
     private final static int colorMask = 0b11000;
     
-    int rank, file, piece;
+    private int rank, file, piece;
 
     public Piece(int rank, int file, int piece) {
         this.rank = rank;

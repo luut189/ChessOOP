@@ -24,7 +24,7 @@ public class Renderer extends JPanel {
 
         this.board = board;
 
-        setPreferredSize(new Dimension(this.width, this.height));
+        this.setPreferredSize(new Dimension(this.width, this.height));
     }
 
     public void paintComponent(Graphics g) {
