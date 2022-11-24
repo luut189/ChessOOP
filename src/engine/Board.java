@@ -51,11 +51,7 @@ public class Board {
                 rank++;
             } else {
                 if(Character.isDigit(symbol)) {
-                    int time = Character.getNumericValue(symbol);
-                    for(int i = 0; i < time; i++) {
-                        this.gameBoard[rank][file] = new Piece(rank, file, Piece.None);
-                        file++;
-                    }
+                    file += Character.getNumericValue(symbol);
                 } else {
                     int pieceColor = Character.isUpperCase(symbol) ? Piece.White : Piece.Black;
                     int pieceType = symbolToPiece.get(Character.toLowerCase(symbol));
@@ -93,6 +89,7 @@ public class Board {
         return this.gameBoard;
     }
 
+    // Getter for variables
     public boolean hasCaptured() {
         return hasCaptured;
     }
