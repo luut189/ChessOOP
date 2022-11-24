@@ -1,4 +1,4 @@
-package gui;
+package gfx;
 
 import javax.swing.JFrame;
 

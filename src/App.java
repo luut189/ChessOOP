@@ -1,5 +1,5 @@
 import engine.Board;
-import gui.GUI;
+import gfx.GUI;
 
 public class App {
 
