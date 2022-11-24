@@ -93,7 +93,7 @@ public class Board {
         return this.gameBoard;
     }
 
-    public boolean isHasCaptured() {
+    public boolean hasCaptured() {
         return hasCaptured;
     }
 
@@ -133,4 +133,32 @@ public class Board {
         return fullmoves;
     }
 
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n     ");
+        for(int i = 0;i < 8; i++) {
+            sb.append("= ");
+        }
+        sb.append("\n");
+        for(int rank = 0; rank < 8; rank++) {
+            sb.append(Math.abs(rank-8) + "  | ");
+            for(int file = 0; file < 8; file++) {
+                Piece piece = this.gameBoard[rank][file];
+                int pieceColor = piece.getPieceColor();
+                String pieceType = Piece.pieceTypes[piece.getPieceType()];
+                boolean isWhite = pieceColor == Piece.White;
+                sb.append((isWhite ? pieceType : pieceType.toLowerCase()) + " ");
+            }
+            sb.append("|\n");
+        }
+        sb.append("     ");
+        for(int i = 0;i < 8; i++) {
+            sb.append("= ");
+        }
+        sb.append("\n     ");
+        for(int i = 0; i < 8; i++) {
+            sb.append(Character.toString(i+97) + " ");
+        }
+        return sb.toString();
+    }
 }
