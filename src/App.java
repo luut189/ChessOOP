@@ -10,6 +10,6 @@ public class App {
 
     public static void main(String[] args) {
         Board board = new Board(startFEN);
-        new GUI(board, "Chess", WINDOW_SIZE, WINDOW_SIZE);
+        new GUI(board, "Chess", WINDOW_SIZE);
     }
 }

@@ -11,20 +11,19 @@ import engine.Piece;
 
 public class Renderer extends JPanel {
 
-    private int width, height, size;
+    private int windowSize, size;
     private Board board;
 
     private final Color lightColor = new Color(255, 237, 213);
     private final Color darkColor = new Color(115, 82, 71);
 
-    public Renderer(Board board, int width, int height) {
-        this.width = width/8*8;
-        this.height = height/8*8;
-        this.size = width/8;
+    public Renderer(Board board, int windowSize) {
+        this.windowSize = windowSize/8*8;
+        this.size = windowSize/8;
 
         this.board = board;
 
-        this.setPreferredSize(new Dimension(this.width, this.height));
+        this.setPreferredSize(new Dimension(this.windowSize, this.windowSize));
     }
 
     public void paintComponent(Graphics g) {
@@ -38,7 +37,9 @@ public class Renderer extends JPanel {
 
         for(int rank = 0; rank < 8; rank++) {
             for(int file = 0; file < 8; file++) {
-                g.drawImage(game[rank][file].getImage(), file*size, rank*size, size, size, null);
+                if(game[rank][file] != null) {
+                    g.drawImage(game[rank][file].getImage(), file*size, rank*size, size, size, null);
+                }
             }
         }
     }
