@@ -54,6 +54,10 @@ public class Piece {
         return this.piece & colorMask;
     }
 
+    public boolean isColorToMove(Board board) {
+        return getPieceColor() == board.getPlayerToMove();
+    }
+
     public Image getImage() {
         String color = getPieceColor() == White ? "W" : "B";
         String type = pieceTypes[getPieceType()];
