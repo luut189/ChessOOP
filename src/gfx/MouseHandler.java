@@ -9,10 +9,16 @@ import engine.Board;
 
 public class MouseHandler extends MouseAdapter {
 
-    Board board;
+    private Board board;
 
-    public MouseHandler(Board board) {
+    private Renderer render;
+    private int size;
+
+    public MouseHandler(Renderer render, Board board, int windowSize) {
         this.board = board;
+        
+        this.render = render;
+        this.size = windowSize/8;
     }
     
     @Override
