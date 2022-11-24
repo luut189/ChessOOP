@@ -6,6 +6,9 @@ public class Board {
 
     private Piece[][] gameBoard;
 
+    private int selectedStartRank, selectedStartFile;
+    private int selectedTargetRank, selectedTargetFile;
+
     private int playerToMove;
     private boolean isWhiteToMove;
     
@@ -24,6 +27,11 @@ public class Board {
     private int fullmoves;
 
     public Board(String fen) {
+        this.selectedStartRank = -1;
+        this.selectedStartFile = -1;
+        this.selectedTargetRank = -1;
+        this.selectedTargetFile = -1;
+        
         initFEN(fen);
     }
 
@@ -85,10 +93,14 @@ public class Board {
         return isWhiteToMove ? Piece.White : Piece.Black;
     }
 
-    public Piece[][] getGameBoard() {
+	public Piece[][] getGameBoard() {
         return this.gameBoard;
     }
 
+    public Piece getPieceAtPosition(int rank, int file) {
+        return this.gameBoard[rank][file];    
+    }
+    
     // Getter for variables
     public boolean hasCaptured() {
         return hasCaptured;
@@ -158,4 +170,32 @@ public class Board {
         }
         return sb.toString();
     }
+
+    // Getter and Setter for selected start square
+    public int getSelectedStartRank() {
+		return selectedStartRank;
+	}
+
+	public int getSelectedStartFile() {
+		return selectedStartFile;
+	}
+
+	public void setSelectedStartPosition(int rank, int file) {
+		this.selectedStartRank = rank;
+        this.selectedStartFile = file;
+	}
+
+    // Getter and Setter for selected target square
+	public int getSelectedTargetRank() {
+		return selectedTargetRank;
+	}
+
+	public int getSelectedTargetFile() {
+		return selectedTargetFile;
+	}
+
+	public void setSelectedTargetPosition(int rank, int file) {
+		this.selectedTargetRank = rank;
+        this.selectedTargetFile = file;
+	}
 }
