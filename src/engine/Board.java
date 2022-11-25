@@ -181,8 +181,18 @@ public class Board {
 	}
 
 	public void setSelectedStartPosition(int rank, int file) {
+        // If user clicked the same square, then deselect the square
+        if(this.selectedStartRank == rank && this.selectedStartFile == file) {
+            desetSelectedStartPosition();
+            return;
+        }
 		this.selectedStartRank = rank;
         this.selectedStartFile = file;
+	}
+
+    public void desetSelectedStartPosition() {
+		this.selectedStartRank = -1;
+        this.selectedStartFile = -1;
 	}
 
     // Getter and Setter for selected target square
