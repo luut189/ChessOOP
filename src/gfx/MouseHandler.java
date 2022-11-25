@@ -47,7 +47,11 @@ public class MouseHandler extends MouseAdapter {
     public void mouseClicked(MouseEvent e) {
         if(SwingUtilities.isLeftMouseButton(e)) {
             Position pos = getPosition(e);
-            this.board.selectStartPosition(pos.getRank(), pos.getFile());
+            if(!board.hasSelectedStart()) {
+                this.board.selectStartPosition(pos.getRank(), pos.getFile());
+            } else {
+                this.board.selectTargetPosition(pos.getRank(), pos.getFile());
+            }
         } else if(SwingUtilities.isRightMouseButton(e)) {
             this.board.deselectStartPosition();
         }

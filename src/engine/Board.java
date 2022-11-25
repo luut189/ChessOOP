@@ -6,6 +6,7 @@ public class Board {
 
     private Piece[][] gameBoard;
 
+    private boolean hasSelectedStart;
     private int selectedStartRank, selectedStartFile;
     private int selectedTargetRank, selectedTargetFile;
 
@@ -27,8 +28,10 @@ public class Board {
     private int fullmoves;
 
     public Board(String fen) {
+        this.hasSelectedStart = false;
         this.selectedStartRank = -1;
         this.selectedStartFile = -1;
+
         this.selectedTargetRank = -1;
         this.selectedTargetFile = -1;
         
@@ -118,12 +121,18 @@ public class Board {
         }
 		this.selectedStartRank = rank;
         this.selectedStartFile = file;
+        this.hasSelectedStart = true;
 	}
 
     public void deselectStartPosition() {
 		this.selectedStartRank = -1;
         this.selectedStartFile = -1;
+        this.hasSelectedStart = false;
 	}
+    
+    public boolean hasSelectedStart() {
+        return this.hasSelectedStart;
+    }
 
     // Getter and Setter for selected target square
 	public int getSelectedTargetRank() {
@@ -135,6 +144,10 @@ public class Board {
 	}
 
 	public void selectTargetPosition(int rank, int file) {
+        if(this.selectedStartRank == rank && this.selectedStartFile == file) {
+            deselectStartPosition();
+            return;
+        }
 		this.selectedTargetRank = rank;
         this.selectedTargetFile = file;
 	}
