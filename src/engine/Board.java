@@ -100,8 +100,46 @@ public class Board {
     public Piece getPieceAtPosition(int rank, int file) {
         return this.gameBoard[rank][file];    
     }
-    
-    // Getter for variables
+
+    // Getter and Setter for selected start square
+    public int getSelectedStartRank() {
+		return selectedStartRank;
+	}
+
+	public int getSelectedStartFile() {
+		return selectedStartFile;
+	}
+
+	public void selectStartPosition(int rank, int file) {
+        // If user clicked the same square, then deselect the square
+        if(this.selectedStartRank == rank && this.selectedStartFile == file) {
+            deselectStartPosition();
+            return;
+        }
+		this.selectedStartRank = rank;
+        this.selectedStartFile = file;
+	}
+
+    public void deselectStartPosition() {
+		this.selectedStartRank = -1;
+        this.selectedStartFile = -1;
+	}
+
+    // Getter and Setter for selected target square
+	public int getSelectedTargetRank() {
+		return selectedTargetRank;
+	}
+
+	public int getSelectedTargetFile() {
+		return selectedTargetFile;
+	}
+
+	public void selectTargetPosition(int rank, int file) {
+		this.selectedTargetRank = rank;
+        this.selectedTargetFile = file;
+	}
+
+    // Getter for variables (Not in used)
     public boolean hasCaptured() {
         return hasCaptured;
     }
@@ -142,6 +180,7 @@ public class Board {
         return fullmoves;
     }
 
+    // Not really in used
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n     ");
@@ -170,42 +209,4 @@ public class Board {
         }
         return sb.toString();
     }
-
-    // Getter and Setter for selected start square
-    public int getSelectedStartRank() {
-		return selectedStartRank;
-	}
-
-	public int getSelectedStartFile() {
-		return selectedStartFile;
-	}
-
-	public void selectStartPosition(int rank, int file) {
-        // If user clicked the same square, then deselect the square
-        if(this.selectedStartRank == rank && this.selectedStartFile == file) {
-            deselectStartPosition();
-            return;
-        }
-		this.selectedStartRank = rank;
-        this.selectedStartFile = file;
-	}
-
-    public void deselectStartPosition() {
-		this.selectedStartRank = -1;
-        this.selectedStartFile = -1;
-	}
-
-    // Getter and Setter for selected target square
-	public int getSelectedTargetRank() {
-		return selectedTargetRank;
-	}
-
-	public int getSelectedTargetFile() {
-		return selectedTargetFile;
-	}
-
-	public void selectTargetPosition(int rank, int file) {
-		this.selectedTargetRank = rank;
-        this.selectedTargetFile = file;
-	}
 }
