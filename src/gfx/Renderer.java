@@ -59,6 +59,15 @@ public class Renderer extends JPanel {
             }
             g.fillRect(selectedStartFile*size, selectedStartRank*size, size, size);
         }
+
+        // Visualize the selected target (Won't be used later on)
+        int selectedTargetRank = board.getSelectedTargetRank();
+        int selectedTargetFile = board.getSelectedTargetFile();
+
+        if(selectedTargetRank != -1 && selectedTargetFile != -1) {
+            g.setColor(new Color(233, 0, 234, 50));
+            g.fillRect(selectedTargetFile*size, selectedTargetRank*size, size, size);
+        }
     }
 
     public void drawBoard(Graphics g) {
