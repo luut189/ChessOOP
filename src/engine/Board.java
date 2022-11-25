@@ -180,17 +180,17 @@ public class Board {
 		return selectedStartFile;
 	}
 
-	public void setSelectedStartPosition(int rank, int file) {
+	public void selectStartPosition(int rank, int file) {
         // If user clicked the same square, then deselect the square
         if(this.selectedStartRank == rank && this.selectedStartFile == file) {
-            desetSelectedStartPosition();
+            deselectStartPosition();
             return;
         }
 		this.selectedStartRank = rank;
         this.selectedStartFile = file;
 	}
 
-    public void desetSelectedStartPosition() {
+    public void deselectStartPosition() {
 		this.selectedStartRank = -1;
         this.selectedStartFile = -1;
 	}
@@ -204,7 +204,7 @@ public class Board {
 		return selectedTargetFile;
 	}
 
-	public void setSelectedTargetPosition(int rank, int file) {
+	public void selectTargetPosition(int rank, int file) {
 		this.selectedTargetRank = rank;
         this.selectedTargetFile = file;
 	}
