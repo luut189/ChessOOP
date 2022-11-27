@@ -2,6 +2,8 @@ package engine;
 
 import java.util.HashMap;
 
+import engine.utils.Flag;
+
 public class Board {
 
     private Piece[][] gameBoard;
@@ -14,7 +16,7 @@ public class Board {
     private boolean isWhiteToMove;
     
     private boolean hasCaptured;
-    private int capturedPiece;
+    private Piece capturedPiece;
 
     private boolean hasEnPassant;
     private int enPassantRank;
@@ -93,7 +95,11 @@ public class Board {
     }
 
     public int getPlayerToMove() {
-        return isWhiteToMove ? Piece.White : Piece.Black;
+        return this.playerToMove;
+    }
+
+    public void setPlayerToMove() {
+        this.playerToMove = isWhiteToMove ? Piece.White : Piece.Black;
     }
 
 	public Piece[][] getGameBoard() {
@@ -102,6 +108,39 @@ public class Board {
 
     public Piece getPieceAtPosition(int rank, int file) {
         return this.gameBoard[rank][file];    
+    }
+
+    public void setPieceAtPosition(int rank, int file, Piece piece) {
+        this.gameBoard[rank][file] = piece;
+        this.gameBoard[rank][file].setRank(rank);
+        this.gameBoard[rank][file].setFile(file);
+    }
+
+    public boolean verifyMove(Move move) {
+        return move.getTargetRank() == selectedTargetRank && move.getTargetFile() == selectedTargetFile;
+    }
+
+    public void makeMove(Move move) {
+        int startRank = move.getStartRank();
+        int startFile = move.getStartFile();
+
+        int targetRank = move.getTargetRank();
+        int targetFile = move.getTargetFile();
+
+        Piece movingPiece = getPieceAtPosition(startRank, startFile);
+        Piece targetPiece = getPieceAtPosition(targetRank, targetFile);
+
+        if(targetPiece != null && movingPiece.getPieceColor() == targetPiece.getPieceColor()) return;
+        
+        this.capturedPiece = targetPiece;
+
+        setPieceAtPosition(startRank, startFile, new Piece(startRank, startFile, Piece.None));
+        setPieceAtPosition(targetRank, targetFile, movingPiece);
+
+        isWhiteToMove = !isWhiteToMove;
+        setPlayerToMove();
+
+        deselectStartPosition();
     }
 
     // Getter and Setter for selected start square
@@ -114,6 +153,8 @@ public class Board {
 	}
 
 	public void selectStartPosition(int rank, int file) {
+        deselectTargetPosition();
+
         // If user clicked the same square, then deselect the square
         if(this.selectedStartRank == rank && this.selectedStartFile == file) {
             deselectStartPosition();
@@ -121,7 +162,11 @@ public class Board {
         }
 		this.selectedStartRank = rank;
         this.selectedStartFile = file;
-        this.hasSelectedStart = true;
+        
+        if(getPieceAtPosition(rank, file) == null) return;
+        
+        this.hasSelectedStart = getPieceAtPosition(rank, file).getPieceColor() == playerToMove;
+        System.out.println(getPieceAtPosition(rank, file).getRank() + " " + getPieceAtPosition(rank, file).getFile());
 	}
 
     public void deselectStartPosition() {
@@ -150,6 +195,14 @@ public class Board {
         }
 		this.selectedTargetRank = rank;
         this.selectedTargetFile = file;
+
+        // Testing (Will be check with actual move later when I have the move generator up and running)
+        makeMove(new Move(selectedStartRank, selectedStartFile, selectedTargetRank, selectedTargetFile, Flag.NONE));
+	}
+
+    public void deselectTargetPosition() {
+		this.selectedTargetRank = -1;
+        this.selectedTargetFile = -1;
 	}
 
     // Getter for variables (Not in used)
@@ -157,7 +210,7 @@ public class Board {
         return hasCaptured;
     }
 
-    public int getCapturedPiece() {
+    public Piece getCapturedPiece() {
         return capturedPiece;
     }
 
