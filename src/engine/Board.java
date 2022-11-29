@@ -130,7 +130,10 @@ public class Board {
         Piece movingPiece = getPieceAtPosition(startRank, startFile);
         Piece targetPiece = getPieceAtPosition(targetRank, targetFile);
 
-        if(targetPiece != null && movingPiece.getPieceColor() == targetPiece.getPieceColor()) return;
+        if(targetPiece != null && movingPiece.getPieceColor() == targetPiece.getPieceColor()) {
+            deselectTargetPosition();
+            return;
+        }
         
         this.capturedPiece = targetPiece;
 
@@ -166,7 +169,6 @@ public class Board {
         if(getPieceAtPosition(rank, file) == null) return;
         
         this.hasSelectedStart = getPieceAtPosition(rank, file).getPieceColor() == playerToMove;
-        System.out.println(getPieceAtPosition(rank, file).getRank() + " " + getPieceAtPosition(rank, file).getFile());
 	}
 
     public void deselectStartPosition() {
